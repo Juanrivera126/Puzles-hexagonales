@@ -6,7 +6,7 @@ Una aplicación web interactiva que permite crear, jugar y descargar rompecabeza
 
 - **Geometría Hexagonal Simétrica:** Genera puzles basados en "anillos" logrando composiciones perfectas de 7, 19, 37 o 61 piezas hexagonales.
 - **Múltiples Fuentes de Imágenes:**
-  - 🤖 **Generación IA:** Crea imágenes escribiendo un *prompt*.
+  - 🤖 **Generación IA:** Crea imágenes escribiendo un prompt.
   - 🌐 **Desde URL:** Pega cualquier enlace público de una imagen.
   - 📁 **Subida Local:** Carga imágenes directamente desde tu PC o teléfono.
 - **Smart Center Crop:** Si la imagen cargada no es cuadrada (ej: formato retrato o paisaje), el algoritmo realiza un recorte virtual centrado automático evitando cualquier tipo de deformación.
