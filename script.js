@@ -133,7 +133,6 @@ function createPuzzlePieces() {
   rotations = Array.from({ length: totalPieces }, () => Math.floor(Math.random() * 6) * 60);
 
   // --- CÁLCULO FLUIDO DEL TAMAÑO (Para evitar scroll horizontal) ---
-  // Calculamos que el tamaño máximo sea 400px, pero que se reduzca si la pantalla es más pequeña
   const availableWidth = window.innerWidth - 40; // Restamos margen de seguridad
   const maxSize = Math.min(availableWidth, 400);
 
@@ -242,7 +241,26 @@ async function initPuzzle() {
 }
 
 async function downloadPuzzle() {
-  const cssStyles = document.querySelector('style').innerHTML;
+  // Obtenemos los estilos desde la etiqueta link (esto asume que se ejecutará donde exista el archivo o se puede reescribir)
+  // Como lo separamos, para mantener la función de descarga en un solo archivo, inyectaremos el CSS que necesitamos
+  const cssStyles = `
+    * { box-sizing: border-box; }
+    body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; margin: 0; padding: 20px 10px; background-color: #f0f0f0; overflow-x: hidden; }
+    .main-content { display: flex; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: center; gap: 30px; margin-bottom: 20px; width: 100%; max-width: 800px; }
+    .puzzle-container { position: relative; background-color: #333; border-radius: 8px; overflow: hidden; transition: transform 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-width: 100%; }
+    .puzzle-piece { position: absolute; background-repeat: no-repeat; cursor: pointer; clip-path: polygon(50% 0%, 93.301% 25%, 93.301% 75%, 50% 100%, 6.699% 75%, 6.699% 25%); transform: scale(var(--scale, 0.98)) rotate(var(--rot, 0deg)); transition: transform 0.3s ease; }
+    .puzzle-piece:hover { --scale: 1.05; z-index: 2; }
+    h1 { margin-top: 10px; margin-bottom: 20px; color: #333; text-align: center; font-size: clamp(24px, 5vw, 36px); }
+    button { padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease, transform 0.1s ease; }
+    button:hover { background-color: #45a049; }
+    button:active { transform: scale(0.95); }
+    #messageContainer { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background-color: rgba(255, 255, 255, 0.95); padding: 15px 30px; border-radius: 50px; text-align: center; font-size: 18px; font-weight: bold; color: #333; display: none; flex-direction: row; align-items: center; gap: 20px; z-index: 100; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3); max-width: 90%; }
+    #messageContainer p { margin: 0; }
+    #playAgainButton { margin: 0; padding: 8px 16px; font-size: 14px; background-color: #2196F3; }
+    #playAgainButton:hover { background-color: #1976D2; }
+    .button-container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; width: 100%; }
+    footer { margin-top: 40px; padding: 20px; text-align: center; color: #666; font-size: 14px; width: 100%; }
+  `;
   
   let imageBase64 = imageUrl; 
   try {
@@ -393,31 +411,29 @@ async function downloadPuzzle() {
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Puzzle Hexagonal</title>
-  <style>
-    ${cssStyles}
-    .input-container, .selector-container, #downloadButton, #uploadButton, #loadUrlButton, #fileInput { display: none !important; }
-    body { background-color: #f0f0f0; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puzzle Hexagonal</title>
+<style>
+${cssStyles}
+</style>
 </head>
 <body>
-  <h1>Puzzle Hexagonal</h1>
-  <div class="main-content">
-    <div class="puzzle-container" id="puzzleContainer"></div>
-  </div>
-  <div id="messageContainer">
-    <p id="message"></p>
-    <button id="playAgainButton">Jugar de nuevo</button>
-  </div>
-  <div class="button-container">
-    <button id="resetButton">Reiniciar Puzzle</button>
-  </div>
-  <footer>
-    Diseñado por Juan Guillermo Rivera Berrío con tecnología Gemini 3.1 Pro
-  </footer>
-  <script>${scriptContent}<\/script>
+<h1>Puzzle Hexagonal</h1>
+<div class="main-content">
+<div class="puzzle-container" id="puzzleContainer"></div>
+</div>
+<div id="messageContainer">
+<p id="message"></p>
+<button id="playAgainButton">Jugar de nuevo</button>
+</div>
+<div class="button-container">
+<button id="resetButton">Reiniciar Puzzle</button>
+</div>
+<footer>
+Diseñado por Juan Guillermo Rivera Berrío con tecnología Gemini 3.1 Pro
+</footer>
+<script>${scriptContent}<\/script>
 </body>
 </html>`;
 
