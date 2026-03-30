@@ -2,6 +2,8 @@
 
 Una aplicación web interactiva que permite crear, jugar y descargar rompecabezas giratorios basados en cuadrículas hexagonales perfectas. Las imágenes del rompecabezas pueden ser generadas mediante las API de [Pollinations AI](https://pollinations.ai/), subidas desde el equipo local o cargadas desde una URL.
 
+[Demo](https://juanrivera126.github.io/Puzles-hexagonales/Ejemplos/Puzles_Collage.html)
+
 ## ✨ Características Principales
 
 - **Geometría Hexagonal Simétrica:** Genera puzles basados en "anillos" logrando composiciones perfectas de 7, 19, 37 o 61 piezas hexagonales.
