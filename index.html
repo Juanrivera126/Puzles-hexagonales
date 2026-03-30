@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base href="https://websim.ai/puzzle/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puzzle Hexagonal Simétrico</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>Puzzle Hexagonal Simétrico</h1>
+
+  <div class="input-container">
+    <input type="text" id="promptInput" placeholder="Prompt IA o pega una URL de imagen (http...)">
+    
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; width: 100%; max-width: 400px;">
+      <button id="generateButton" style="flex: 1; min-width: 120px;">Generar IA</button>
+      <button id="loadUrlButton" style="flex: 1; min-width: 120px;">Cargar URL</button>
+      <button id="uploadButton" style="flex: 1; min-width: 120px;">Subir Archivo</button>
+    </div>
+    <input type="file" id="fileInput" accept="image/*" style="display: none;">
+  </div>
+  
+  <div class="main-content">
+    <div class="puzzle-container" id="puzzleContainer">
+      <div id="loadingMessage">Cargando imagen...</div>
+    </div>
+    
+    <div class="selector-container">
+      <button class="size-selector active" data-rings="1">7 Piezas</button>
+      <button class="size-selector" data-rings="2">19 Piezas</button>
+      <button class="size-selector" data-rings="3">37 Piezas</button>
+      <button class="size-selector" data-rings="4">61 Piezas</button>
+    </div>
+  </div>
+  
+  <div id="messageContainer">
+    <p id="message"></p>
+    <button id="playAgainButton">Jugar de nuevo</button>
+  </div>
+  
+  <div class="button-container">
+    <button id="resetButton">Reiniciar Puzzle</button>
+    <button id="downloadButton">Descargar Puzzle</button>
+  </div>
+
+  <footer>
+    Diseñado por Juan Guillermo Rivera Berrío con tecnología Gemini 3.1 Pro
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
