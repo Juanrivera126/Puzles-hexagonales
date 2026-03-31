@@ -193,11 +193,54 @@ function rotatePiece(piece, index) {
   checkWin();
 }
 
+function showConfetti() {
+  const colors = ['#f44336', '#e91e63', '#9c27b0', '#3f51b5', '#2196f3', '#4caf50', '#ffeb3b', '#ff9800'];
+  const container = document.body;
+  for (let i = 0; i < 50; i++) {
+    const confetti = document.createElement('div');
+    confetti.style.cssText = `
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      left: ${Math.random() * 100}vw;
+      top: -20px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1000;
+      animation: confettiFall ${2 + Math.random() * 2}s linear forwards;
+    `;
+    container.appendChild(confetti);
+    setTimeout(() => confetti.remove(), 4000);
+  }
+}
+
+function showFullImage() {
+  const pieces = puzzleContainer.querySelectorAll('.puzzle-piece');
+  pieces.forEach(piece => piece.style.opacity = '0');
+  const img = document.createElement('img');
+  img.src = imageUrl;
+  img.style.cssText = `
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    animation: fadeIn 0.5s ease forwards;
+    z-index: 10;
+  `;
+  puzzleContainer.appendChild(img);
+}
+
 function checkWin() {
   if (rotations.every(rotation => rotation % 360 === 0)) {
     setTimeout(() => {
       message.textContent = '¡Felicidades! Puzzle completado.';
       messageContainer.style.display = 'flex';
+      showFullImage();
+      showConfetti();
     }, 300);
   }
 }
@@ -250,6 +293,8 @@ async function downloadPuzzle() {
     .puzzle-container { position: relative; background-color: #333; border-radius: 8px; overflow: hidden; transition: transform 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.3); max-width: 100%; }
     .puzzle-piece { position: absolute; background-repeat: no-repeat; cursor: pointer; clip-path: polygon(50% 0%, 93.301% 25%, 93.301% 75%, 50% 100%, 6.699% 75%, 6.699% 25%); transform: scale(var(--scale, 0.98)) rotate(var(--rot, 0deg)); transition: transform 0.3s ease; }
     .puzzle-piece:hover { --scale: 1.05; z-index: 2; }
+    @keyframes confettiFall { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(100vh) rotate(720deg); opacity: 0; } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     h1 { margin-top: 10px; margin-bottom: 20px; color: #333; text-align: center; font-size: clamp(24px, 5vw, 36px); }
     button { padding: 10px 20px; font-size: 16px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s ease, transform 0.1s ease; }
     button:hover { background-color: #45a049; }
@@ -380,11 +425,32 @@ async function downloadPuzzle() {
       checkWin();
     }
 
+    function showConfetti() {
+      const colors = ['#f44336', '#e91e63', '#9c27b0', '#3f51b5', '#2196f3', '#4caf50', '#ffeb3b', '#ff9800'];
+      for (let i = 0; i < 50; i++) {
+        const confetti = document.createElement('div');
+        confetti.style.cssText = 'position:fixed;width:10px;height:10px;background:' + colors[Math.floor(Math.random() * colors.length)] + ';left:' + (Math.random() * 100) + 'vw;top:-20px;border-radius:50%;pointer-events:none;z-index:1000;animation:confettiFall ' + (2 + Math.random() * 2) + 's linear forwards';
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 4000);
+      }
+    }
+
+    function showFullImage() {
+      const pieces = puzzleContainer.querySelectorAll('.puzzle-piece');
+      pieces.forEach(piece => piece.style.opacity = '0');
+      const img = document.createElement('img');
+      img.src = imageUrl;
+      img.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;pointer-events:none;animation:fadeIn 0.5s ease forwards;z-index:10';
+      puzzleContainer.appendChild(img);
+    }
+
     function checkWin() {
       if (rotations.every(rotation => rotation % 360 === 0)) {
         setTimeout(() => {
           message.textContent = '¡Felicidades! Puzzle completado.';
           messageContainer.style.display = 'flex';
+          showFullImage();
+          showConfetti();
         }, 300);
       }
     }
