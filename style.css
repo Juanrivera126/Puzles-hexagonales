@@ -169,6 +169,22 @@ button:active {
   background-color: #1976D2;
 }
 
+#saveButton {
+  background-color: #009688;
+}
+
+#saveButton:hover {
+  background-color: #00796B;
+}
+
+#galleryButton {
+  background-color: #E91E63;
+}
+
+#galleryButton:hover {
+  background-color: #C2185B;
+}
+
 #uploadButton {
   background-color: #FF9800;
 }
