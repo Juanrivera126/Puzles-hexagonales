@@ -1,6 +1,6 @@
 # Puzzle Hexagonal Simétrico
 
-Aplicación web interactiva que genera puzzles con piezas hexagonales a partir de imágenes generadas por IA, URLs externas o archivos locales. Permite guardar múltiples puzzles y exportarlos como una galería HTML interactiva.
+Aplicación web interactiva que genera puzzles con piezas hexagonales a partir de imágenes generadas por [Pollinations AI](https://pollinations.ai/), URLs externas o archivos locales. Permite guardar múltiples puzzles y exportarlos como una galería HTML interactiva.
 
 Diseñado por **Juan Guillermo Rivera Berrío** con tecnología Gemini 3.1 Pro.
 
